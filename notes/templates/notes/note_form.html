@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create/Update Note</title>
+</head>
+<style>
+  
+/* Form Styles */
+form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form input, form textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background-color: #28a745;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+form button:hover {
+    background-color: #218838;
+}
+</style>
+<body>
+    <div>
+    <h1>{% if note %}Update{% else %}Create{% endif %} Note</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <input type="text" name="title" value="{{ note.title|default:'' }}" placeholder="Title" required>
+        <textarea name="content" placeholder="Content" required>{{ note.content|default:'' }}</textarea>
+        <button type="submit">{% if note %}Update{% else %}Create{% endif %}</button>
+    </form>
+</body>
+</html>
